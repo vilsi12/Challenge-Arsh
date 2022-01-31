@@ -1,0 +1,34 @@
+class Solution {
+public:
+    bool winnerOfGame(string colors) {
+        int alice=0;
+        int bob=0;
+        
+        int i=0;
+        while(i<colors.length()){
+            if(colors[i]=='A'){
+                int t1=0;
+                while(colors[i]=='A'){
+                    t1++;
+                    i++;
+                }
+                if(t1>=3){
+                    alice+=(t1-2);
+                }
+            }
+            else{
+                int t2=0;
+                while(colors[i]=='B'){
+                    t2++;
+                    i++;
+                }
+                if(t2>=3){
+                    bob+=(t2-2);
+                }
+            }
+            
+        }
+                
+        return alice>bob;
+    }
+};

@@ -1,0 +1,49 @@
+int fun(string s){
+    int x=0;
+    for(int i=0;i<s.length();i++){
+        x=(x*10)+s[i]-'0';
+    }
+    return x;
+}
+
+int missingNumber(const string& str)
+{
+    // Code here
+    int n=str.length();
+    for(int len=1;len<=6;len++){
+        string t="";
+        int l=len;
+        int i=0;
+        while(i<n && l--){
+            t+=str[i];
+            i++;
+        }
+        
+        int prev=fun(t);
+        int c=0,j=i,miss,flag=0;
+        
+        t="";
+        while(j<str.size()){
+            t+=str[j++];
+            if(prev+1==fun(t)){
+                prev=fun(t);
+                t="";
+            }
+            else if(prev+2==fun(t)){
+                c++;
+                miss=prev+1;
+                prev=fun(t);
+                t="";
+            }
+            else if(prev<fun(t)){
+                flag=1;
+                break;
+            }
+        }
+        if(c==1 && !flag){
+            return miss;
+        }
+    
+    }
+    return -1;
+}

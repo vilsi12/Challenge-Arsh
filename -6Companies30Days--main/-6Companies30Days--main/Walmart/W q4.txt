@@ -1,0 +1,26 @@
+class Solution
+{
+    public:
+    //Function to find total number of unique paths.
+    int NumberOfPath(int a, int b)
+    {
+        //code here
+        int x=a-1;
+        int y=b-1;
+        
+        int f1=x+y;
+        int f2;
+        if(x<y){
+            f2=x;
+        }
+        else{
+            f2=y;
+        }
+        
+       int res=1;
+       for(int i=1;i<=f2;i++){
+           res=res*(f1-i+1)/i;
+       }
+       return res;
+    }
+};

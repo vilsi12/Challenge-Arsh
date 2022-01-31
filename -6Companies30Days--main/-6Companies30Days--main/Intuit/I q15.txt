@@ -1,0 +1,40 @@
+class Solution {
+public:
+    
+    bool fun(int mid,vector<int>piles,int h){
+        int x=0;
+        
+        for(int i=0;i<piles.size();i++){
+            int t=piles[i]/mid;
+            int q=piles[i]%mid;
+            x+=t;
+            if(q){
+                x++;
+            }
+        }
+        
+        if(x<=h){
+            return true;
+        }
+        return false;
+    }
+    
+    
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int l=1;
+        int r=0;
+        for(int i=0;i<piles.size();i++){
+            r=max(r,piles[i]);
+        }
+        while(l<r){
+            int mid=(l+r)/2;
+            if(fun(mid,piles,h)==true){
+                r=mid;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return l;
+    }
+};

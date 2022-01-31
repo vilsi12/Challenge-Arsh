@@ -1,0 +1,52 @@
+class Solution
+{
+	public:
+    //Function to find if the given edge is a bridge in graph.
+    
+    void dfs(int i,vector<int>adj[],vector<bool> &vis){
+        vis[i]=true;
+        for(auto it:adj[i]){
+            if(!vis[it]){
+                dfs(it,adj,vis);
+            }
+        }
+    }
+    
+    void dfs2(int i,vector<int>adj[],vector<bool> &vis,int c,int d){
+        vis[i]=true;
+        for(auto it:adj[i]){
+            if(vis[it] || ((i==c && it==d)||(i==d && it==c))){
+                continue;
+            }
+            dfs2(it,adj,vis,c,d);
+        }
+    }
+    
+    int isBridge(int V, vector<int> adj[], int c, int d) 
+    {
+        // Code here
+        vector<bool>vis(V,false);
+        int ct=0;
+        
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                dfs(i,adj,vis);
+                ct++;
+            }
+            vis[i]=false;
+        }
+        
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                dfs2(i,adj,vis,c,d);
+                ct--;
+            }
+        }
+        
+        if(ct==0){
+            return 0;
+        }
+        return 1;
+        
+    }
+};

@@ -1,0 +1,34 @@
+class Solution{
+public:	
+
+	void matchPairs(char nuts[], char bolts[], int n) {
+	    // code here
+	    char arr[9]={'!','#','$','%','&','*','@','^','~'};
+	    int k=0;
+	    for(int i=0;i<9;i++){
+	        for(int j=k;j<n;j++){
+	            if(arr[i]==nuts[j]){
+	                char temp=nuts[k];
+	                nuts[k]=nuts[j];
+	                nuts[j]=temp;
+	                k++;
+	            }
+	        }
+	    }
+	    int p=0;
+	    for(int i=0;i<9;i++){
+	        for(int j=0;j<n;j++){
+	            if(arr[i]==bolts[j]){
+	                char temp=bolts[p];
+	                bolts[p]=bolts[j];
+	                bolts[j]=temp;
+	                p++;
+	            }
+	        }
+	    }
+	   // for(int i=0;i<nuts.size();i++){
+	        
+	   // }
+	}
+
+};

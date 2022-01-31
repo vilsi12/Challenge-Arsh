@@ -1,0 +1,19 @@
+class Solution{
+public:	
+    ull getNthUglyNo(int n){
+        set<long long>s;
+        s.insert(1);
+        long long x;
+        n=n-1;
+        while(n){
+            auto it=s.begin();
+            x=*it;
+            s.erase(it);
+            s.insert(2*x);
+            s.insert(3*x);
+            s.insert(5*x);
+            n--;
+        }
+        return *s.begin();
+    }
+};

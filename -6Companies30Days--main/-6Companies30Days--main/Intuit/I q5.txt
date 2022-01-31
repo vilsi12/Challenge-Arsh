@@ -1,0 +1,45 @@
+class Solution {
+public:
+    
+    bool fun(int mid,vector<int>nums,int m){
+        int t=0;
+        int s=1;
+        for(int i=0;i<nums.size();i++){
+            if(t+nums[i]<=mid){
+                t+=nums[i];
+            }
+            else{
+                s++;
+                t=nums[i];
+                if(t>mid){
+                    return false;
+                }
+            }
+        }
+        if(s<=m){
+            return true;
+        }
+        return false;
+        
+    }
+    
+    int splitArray(vector<int>& nums, int m) {
+        int l=0;
+        int r=0;
+        for(int i=0;i<nums.size();i++){
+            r+=nums[i];
+        }
+        
+        while(l<r){
+            // cout<<l<<" "<<r<<" ";
+            int mid=(l+r)/2;
+            if(fun(mid,nums,m)==true){
+                r=mid;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return l;
+    }
+};

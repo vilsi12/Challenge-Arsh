@@ -1,0 +1,46 @@
+class Solution
+{
+    public:
+    
+    int fun(int i,int j,vector<vector<int>>&grid,int m,int n){
+        if(i<0 || j<0 || i>=m || j>=n){
+            return 0;
+        }
+        int sum=0;
+        if(grid[i][j]==1){
+            grid[i][j]=0;
+            sum+=fun(i,j+1,grid,m,n);
+            sum+=fun(i,j-1,grid,m,n);
+            sum+=fun(i-1,j,grid,m,n);
+            sum+=fun(i+1,j,grid,m,n);
+            sum+=fun(i-1,j-1,grid,m,n);
+            sum+=fun(i-1,j+1,grid,m,n);
+            sum+=fun(i+1,j-1,grid,m,n);
+            sum+=fun(i+1,j+1,grid,m,n);
+            return 1+sum;
+        }
+        else{
+            return 0;
+        }
+    }
+    
+    //Function to find unit area of the largest region of 1s.
+    int findMaxArea(vector<vector<int>>& grid) {
+        // Code here
+        int ans=INT_MIN;
+        int m=grid.size();
+        int n=grid[0].size();
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
+                if(grid[i][j]){
+                    int x=fun(i,j,grid,m,n);
+                    ans=max(ans,x);
+                }
+               
+            }
+        }
+        return ans;
+    }
+};
+
+

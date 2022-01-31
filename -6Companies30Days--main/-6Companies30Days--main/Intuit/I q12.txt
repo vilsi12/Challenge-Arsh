@@ -1,0 +1,82 @@
+class Solution {
+public:
+    
+    bool check(int i,int v[],int dfsv[],vector<int>adj[]){
+        v[i]=1;
+        dfsv[i]=1;
+        
+        for(auto it:adj[i]){
+            if(v[it]==0){
+                if(check(it,v,dfsv,adj)){
+                    return true;
+                }
+            }
+            else if(dfsv[it]==1){
+                return true;
+            }
+        }
+        
+        dfsv[i]=0;
+        return false;
+    }
+    
+    
+    void topo(int i,vector<int>&vis,vector<int>adj[],stack<int>&s){
+        vis[i]=1;
+        
+        for(auto it:adj[i]){
+            if(vis[it]==0){
+                topo(it,vis,adj,s);
+            }
+        }
+        s.push(i);
+    }
+    
+    
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int>adj[numCourses];
+        
+        for(int i=0;i<prerequisites.size();i++){
+            int a=prerequisites[i][0];
+            int b=prerequisites[i][1];
+            adj[b].push_back(a);
+        }
+        
+        bool cycle=false;
+        int v[numCourses];
+        int dfsv[numCourses];
+        memset(v,0,sizeof(v));
+        memset(dfsv,0,sizeof(dfsv));
+        
+        for(int i=0;i<numCourses;i++){
+            if(v[i]==0){
+                if(check(i,v,dfsv,adj)){
+                    cycle=true;
+                    break;
+                }
+            }
+        }
+        
+        if(cycle==true){
+            vector<int>t;
+            return t;
+        }
+        
+        stack<int>s;
+        vector<int>vis(numCourses,0);
+        
+        for(int i=0;i<numCourses;i++){
+            if(vis[i]==0){
+                topo(i,vis,adj,s);
+            }
+        }
+        
+        vector<int>ans;
+        while(!s.empty()){
+            ans.push_back(s.top());
+            s.pop();
+        }
+        return ans;
+    }
+};
+

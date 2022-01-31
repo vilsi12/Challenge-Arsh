@@ -1,0 +1,19 @@
+class Solution{
+public:
+    int minSteps(int D){
+        // code here
+        int sum=0;
+        int steps=1;
+        
+        while(true){
+            sum+=steps;
+            steps++;
+            if(sum==D){
+                return steps-1;
+            }
+            if(sum>D && (sum-D)%2==0){
+                return steps-1;
+            }
+        }
+    }
+};

@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int fun(int start,int end,vector<vector<int>>&dp){
+        if(start>=end){
+            return 0;
+        }
+        
+        if(dp[start][end]!=INT_MAX){
+            return dp[start][end];
+        }
+        
+        int res=INT_MAX;    
+    
+        for(int i=start;i<=end;i++){
+            int t=i+max(fun(start,i-1,dp),fun(i+1,end,dp));
+            res=min(res,t);
+        }
+        dp[start][end]=res;
+        return res;
+    }
+    
+    int getMoneyAmount(int n) {
+        vector<vector<int>>dp(n+1,vector<int>(n+1,INT_MAX));
+        return fun(1,n,dp);
+    }
+};
+

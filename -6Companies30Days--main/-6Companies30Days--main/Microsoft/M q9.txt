@@ -1,0 +1,29 @@
+int fun(Node* root,int x,int &ans){
+    if(root==NULL){
+        return 0;
+    }
+    
+    int y=root->data+fun(root->left,x,ans)+fun(root->right,x,ans);
+    if(y==x){
+        ans++;
+    }
+    return y;
+}
+
+int countSubtreesWithSumX(Node* root, int X)
+{
+	// Code here
+	if(root==NULL){
+	    return 0;
+	}
+	int ans=0;
+
+	int l=fun(root->left,X,ans);
+	int r=fun(root->right,X,ans);
+	
+	if(root->data+l+r==X){
+	    ans++;
+	}
+	return ans;
+
+}

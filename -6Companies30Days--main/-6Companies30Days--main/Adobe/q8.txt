@@ -1,0 +1,24 @@
+class Solution{
+  public:
+    /*You are required to complete this method */
+    int atoi(string str) {
+        //Your code here
+        int ans=0;
+        bool b=false;
+        if(str[0]=='-'){
+            b=true;
+        }
+        for(int i=0;i<str.length();i++){
+            if(str[i]>='a' && str[i]<='z'){
+                return -1;
+            }
+            if(str[i]>='0' && str[i]<='9'){
+                ans=(ans*10)+str[i]-'0';
+            }
+        }
+        if(b==true){
+            return (-1*ans);
+        }
+        return ans;
+    }
+};

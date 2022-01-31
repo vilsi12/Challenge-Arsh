@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    bool canPair(vector<int> nums, int k) {
+        //Code here
+        map<int,int>m;
+        for(auto it:nums){
+            m[it%k]++;
+        }
+        
+        if(m[0]%2!=0){
+            return false;
+        }
+        
+        for(auto x:m){
+            int r=x.first;
+            int f=x.second;
+            if(r!=0 && f!=m[k-r]){
+                return false;
+            }
+        }
+        return true;
+    }
+};

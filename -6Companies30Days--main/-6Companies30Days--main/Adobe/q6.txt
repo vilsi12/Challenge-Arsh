@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+    void fun(int o,int c,string s,vector<string>&ans){
+        if(o==0 && c==0){
+            ans.push_back(s);
+            return;
+        }
+        else if(o==c){
+            fun(o-1,c,s+='(',ans);
+        }
+        
+        else{
+            if(o!=0 && c!=0){
+                string o1=s;
+                string o2=s;
+                o1+='(';
+                o2+=')';
+                fun(o-1,c,o1,ans);
+                fun(o,c-1,o2,ans);
+            }
+            else if(o==0 && c!=0){
+                fun(o,c-1,s+=')',ans);
+            }
+        
+        }
+        
+        
+    }
+    
+    vector<string> AllParenthesis(int n) 
+    {
+        // Your code goes here 
+        vector<string>ans;
+        fun(n,n,"",ans);
+        return ans;
+    }
+};

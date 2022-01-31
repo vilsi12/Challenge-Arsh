@@ -1,0 +1,22 @@
+class Solution{
+    public:
+    //You need to complete this fucntion
+    
+    long long power(int N,int R)
+    {
+       //Your code here
+       long long M=1000000007;
+       if(R==1){
+           return N;
+       }
+       
+       if(R%2!=0){
+           return (N*(power(N,R-1)%M))%M;
+       }
+       else{
+           long long x=power(N,R/2)%M;
+           return (x*x)%M;
+       }
+    }
+
+};

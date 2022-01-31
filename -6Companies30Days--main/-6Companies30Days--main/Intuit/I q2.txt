@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool fun(vector<vector<char>>&board, string word,int pos,int row,int col){
+        if(pos==word.size()){
+            return true;
+        }
+        
+        if(row<0 || col<0 || row>=board.size() || col>=board[0].size()){
+            return false;
+        }
+        
+        if(board[row][col]==word[pos]){
+            board[row][col]='-';
+            bool left=fun(board,word,pos+1,row,col-1);
+            bool right=fun(board,word,pos+1,row,col+1);
+            bool up=fun(board,word,pos+1,row-1,col);
+            bool down=fun(board,word,pos+1,row+1,col);
+            board[row][col]=word[pos];
+            return left || right || up || down;
+        }
+        return false;
+        
+    }
+    
+    bool isWordExist(vector<vector<char>>& board, string word) {
+        // Code here
+        int row=board.size();
+        int col=board[0].size();
+        
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(fun(board,word,0,i,j)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};

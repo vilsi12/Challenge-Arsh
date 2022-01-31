@@ -1,0 +1,49 @@
+class Solution {
+public:
+
+    bool cycle(int i,vector<int>adj[],int vis[],int dfsvis[]){
+        vis[i]=1;
+        dfsvis[i]=1;
+        
+        for(auto it:adj[i]){
+            if(!vis[it]){
+                if(cycle(it,adj,vis,dfsvis)){
+                    return true;
+                }
+            }
+            else if(dfsvis[it]){
+                return true;
+            }
+        }
+        
+        dfsvis[i]=0;
+        return false;
+    }
+
+
+	bool isPossible(int N, vector<pair<int, int> >& prerequisites) {
+	    // Code here
+	    vector<int>adj[N];
+	    
+	    for(int i=0;i<prerequisites.size();i++){
+	        int u=prerequisites[i].second;
+	        int v=prerequisites[i].first;
+	        adj[u].push_back(v);
+	    }
+	    
+	    int vis[N];
+	    int dfsvis[N];
+	    
+	    memset(vis,0,sizeof(vis));
+	    memset(dfsvis,0,sizeof(dfsvis));
+	    
+	    for(int i=0;i<N;i++){
+	        if(!vis[i]){
+	            if(cycle(i,adj,vis,dfsvis)){
+	                return false;
+	            }
+	        }
+	    }
+	    return true;
+	}
+};

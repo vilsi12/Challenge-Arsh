@@ -1,0 +1,33 @@
+pair<int,int> findSmallestRange(int arr[][N], int n, int k)
+    {
+          //code here
+        int min = INT_MAX, maxi = INT_MIN, range = INT_MAX;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
+        vector<int>index(k, 0);
+        int ansmin, ansmax;
+        for(int i = 0; i < k; i++)
+        {
+            pq.push({arr[i][0], i});
+            maxi = max(maxi, arr[i][0]);
+        }
+        while(!pq.empty())
+        {
+            pair<int, int>p = pq.top();
+            pq.pop();
+            min = p.first;
+            if(range > (maxi - min))
+            {
+                range = maxi - min;
+                ansmin = min;
+                ansmax = maxi;
+            }
+            if(index[p.second] == n - 1)
+            {
+                break;
+            }
+            index[p.second]++;    
+            pq.push({arr[p.second][index[p.second]], p.second});
+            maxi = max(maxi, arr[p.second][index[p.second]]);
+        }
+        return {ansmin, ansmax};
+}

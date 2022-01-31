@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    int findPosition(int N , int M , int K) {
+        // code here
+        if(N==1){
+            return 1;
+        }
+        if(M>=N){
+            M=M%N;
+            if(K+M-1>N){
+                return (K+M-1)%N;
+            }
+            return K+(M-1);
+        }
+        if(K+M-1<=N){
+            return K+M-1;
+        }
+        return (K+M-1)%N;
+    }
+};

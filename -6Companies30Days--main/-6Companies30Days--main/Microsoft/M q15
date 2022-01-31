@@ -1,0 +1,43 @@
+class Solution{
+    public:
+    void fun(int i,vector<int>&vis,vector<int>adj[],vector<int>&topo){
+        vis[i]=1;
+        for(auto it:adj[i]){
+            if(!vis[it]){
+                fun(it,vis,adj,topo);
+            }
+        }
+        topo.push_back(i);
+    }
+    
+    string findOrder(string dict[], int N, int K) {
+        //code here
+        vector<int>adj[K];
+        for(int i=1;i<N;i++){
+            string s1=dict[i-1];
+            string s2=dict[i];
+            int x=min(s1.length(),s2.length());
+            for(int j=0;j<x;j++){
+                if(s1[j]!=s2[j]){
+                    adj[s1[j]-'a'].push_back(s2[j]-'a');
+                    break;
+                }
+            }
+        }
+        
+        vector<int>vis(K,0);
+        vector<int>topo;
+        for(int i=0;i<K;i++){
+            if(!vis[i]){
+                fun(i,vis,adj,topo);
+            }
+        }
+        
+        reverse(topo.begin(),topo.end());
+        string ans="";
+        for(int i=0;i<topo.size();i++){
+            ans+=topo[i]+'a';
+        }
+        return ans;
+    }
+};

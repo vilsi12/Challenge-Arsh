@@ -1,0 +1,16 @@
+vector<string> generate(int N)
+{
+	// Your code here
+	vector<string>ans;
+	for(int i=1;i<=N;i++){
+	    string s="";
+	    int x=i;
+	    while(x){
+	        int rem=x%2;
+	        x=x/2;
+	        s=to_string(rem)+s;
+	    }
+	    ans.push_back(s);
+	}
+	return ans;
+}

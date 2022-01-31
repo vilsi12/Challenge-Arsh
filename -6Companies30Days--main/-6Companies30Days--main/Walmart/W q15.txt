@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        
+         if (dividend == -2147483648 && divisor == -1) {
+             return 2147483647;
+         }
+        
+        bool f;
+        if((dividend>=0 && divisor>=0) || (dividend<0 && divisor<0)){
+            f=true;
+        }
+        else{
+            f=false;
+        }
+        
+        long int divi=abs(dividend);
+        long int divis=abs(divisor);
+        
+        long int res=0;
+        while(divi-divis>=0){
+            long int count=1;
+            while(divi-(divis<<count)>=0){
+                count++;
+            }
+            res+=(1<<count-1);
+            divi=divi-(divis<<count-1);
+        }
+        
+        if(f==false){
+            return -1*res;
+        }
+        return res;
+    }  
+};

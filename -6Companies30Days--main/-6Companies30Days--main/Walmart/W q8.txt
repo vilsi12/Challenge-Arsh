@@ -1,0 +1,21 @@
+class Solution{
+public:
+    int height(int N){
+        // code here
+        int h=0;
+        int i=1;
+        // int s=0;
+        while(N){
+            if(N>=i){
+                h++;
+            }
+            else{
+                N=0;
+                break;
+            }
+            N-=i;
+            i++;
+        }
+        return h;
+    }
+};
